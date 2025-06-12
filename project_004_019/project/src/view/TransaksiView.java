@@ -35,7 +35,6 @@ public class TransaksiView extends JFrame {
         setSize(400, 350);
         setLayout(null);
 
-        // Load barang dari controller
         BarangController barangController = new BarangController();
         barangList = barangController.getAllBarang();
 
@@ -49,7 +48,6 @@ public class TransaksiView extends JFrame {
             comboBarang.addItem(b.getNama());
         }
 
-        // Label
         JLabel namaLabel = new JLabel("Nama Barang");
         JLabel hargaLabel = new JLabel("Harga Barang");
         JLabel jumlahLabel = new JLabel("Jumlah Beli");
@@ -57,7 +55,6 @@ public class TransaksiView extends JFrame {
         JLabel bayarLabel = new JLabel("Jumlah Bayar");
         JLabel kembaliLabel = new JLabel("Jumlah Kembalian");
 
-        // Posisi komponen
         namaLabel.setBounds(30, 20, 120, 25);
         comboBarang.setBounds(150, 20, 150, 25);
         hargaLabel.setBounds(30, 50, 120, 25);
@@ -78,7 +75,6 @@ public class TransaksiView extends JFrame {
         totalField.setEditable(false);
         kembalianField.setEditable(false);
 
-        // Listener pilih barang
         comboBarang.addActionListener(e -> {
             int index = comboBarang.getSelectedIndex();
             if (index >= 0 && index < barangList.size()) {
@@ -87,7 +83,6 @@ public class TransaksiView extends JFrame {
             }
         });
 
-        // Hitung total harga
         hitungBtn.addActionListener(e -> {
             try {
                 if (jumlahField.getText().isEmpty()) {
@@ -104,7 +99,6 @@ public class TransaksiView extends JFrame {
             }
         });
 
-        // Hitung kembalian
         bayarBtn.addActionListener(e -> {
             try {
                 if (totalField.getText().isEmpty()) {
@@ -128,15 +122,11 @@ public class TransaksiView extends JFrame {
 
                 kembalianField.setText(String.valueOf(kembali));
 
-                // Reset form setelah transaksi berhasil
-                // resetForm();
-
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Isi jumlah bayar dengan angka!");
             }
         });
 
-        // Buka window edit barang dengan konfirmasi
         editBtn.addActionListener(e -> {
             int konfirmasi = JOptionPane.showConfirmDialog(this, "Yakin ingin edit data barang?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (konfirmasi == JOptionPane.YES_OPTION) {
@@ -144,7 +134,6 @@ public class TransaksiView extends JFrame {
             }
         });
 
-        // Tambahkan semua ke frame
         add(namaLabel); add(comboBarang);
         add(hargaLabel); add(hargaField);
         add(jumlahLabel); add(jumlahField);
@@ -158,7 +147,6 @@ public class TransaksiView extends JFrame {
         setVisible(true);
     }
 
-    // Reset form
     private void resetForm() {
         comboBarang.setSelectedIndex(0);
         hargaField.setText("");
