@@ -62,7 +62,7 @@ public class BarangController {
     }
 
     public void updateBarang(int id, String nama, int harga, int stok) {
-        // SQL diubah untuk menggunakan 'nama_barang' dan 'id_barang'
+        
         String sql = "UPDATE barang SET nama_barang = ?, harga = ?, stok = ? WHERE id_barang = ?";
         try (Connection conn = Koneksi.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -72,10 +72,10 @@ public class BarangController {
                 return;
             }
 
-            pstmt.setString(1, nama); // Parameter pertama untuk nama_barang
+            pstmt.setString(1, nama); 
             pstmt.setInt(2, harga);
             pstmt.setInt(3, stok);
-            pstmt.setInt(4, id);     // Parameter keempat untuk id_barang
+            pstmt.setInt(4, id);     
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("Data barang dengan ID " + id + " berhasil diperbarui.");
@@ -91,7 +91,7 @@ public class BarangController {
 
     public List<Barang> getAllBarang() {
         List<Barang> daftarBarang = new ArrayList<>();
-        // SQL diubah untuk mengambil 'id_barang' dan 'nama_barang'
+        
         String sql = "SELECT id_barang, nama_barang, harga, stok FROM barang";
         try (Connection conn = Koneksi.getConnection();
              Statement stmt = conn.createStatement();
@@ -103,10 +103,10 @@ public class BarangController {
             }
 
             while (rs.next()) {
-                // Saat membuat objek Barang, ambil dari kolom yang benar
+                
                 Barang barang = new Barang(
-                        rs.getInt("id_barang"),    // Mengambil dari kolom id_barang
-                        rs.getString("nama_barang"), // Mengambil dari kolom nama_barang
+                        rs.getInt("id_barang"),    
+                        rs.getString("nama_barang"), 
                         rs.getInt("harga"),
                         rs.getInt("stok")
                 );
