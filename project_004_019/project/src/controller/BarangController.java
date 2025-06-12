@@ -1,7 +1,7 @@
 package controller;
 
 import model.Barang;
-import util.Koneksi; // Impor utilitas koneksi
+import util.Koneksi; 
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import java.util.List;
 public class BarangController {
 
     public BarangController() {
-        // Konstruktor bisa tetap kosong
+        
     }
 
     public void tambahBarang(String nama, int harga, int stok) {
-        // SQL diubah untuk menggunakan 'nama_barang'
+        
         String sql = "INSERT INTO barang (nama_barang, harga, stok) VALUES (?, ?, ?)";
         try (Connection conn = Koneksi.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -24,7 +24,7 @@ public class BarangController {
                 return;
             }
 
-            pstmt.setString(1, nama); // Parameter pertama untuk nama_barang
+            pstmt.setString(1, nama); 
             pstmt.setInt(2, harga);
             pstmt.setInt(3, stok);
             pstmt.executeUpdate();
@@ -37,7 +37,7 @@ public class BarangController {
     }
 
     public void hapusBarang(int id) {
-        // SQL diubah untuk menggunakan 'id_barang'
+        
         String sql = "DELETE FROM barang WHERE id_barang = ?";
         try (Connection conn = Koneksi.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
