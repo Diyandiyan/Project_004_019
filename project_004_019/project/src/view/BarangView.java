@@ -12,7 +12,7 @@ import java.util.List;
 public class BarangView extends JFrame {
     private JTextField txtId, txtNama, txtHarga, txtStok;
     private JButton btnTambah, btnHapus, btnUpdate, btnClear;
-    private JButton btnKembaliMenuTransaksi; // Tombol baru
+    private JButton btnKembaliMenuTransaksi; 
     private JTable table;
     private DefaultTableModel tableModel;
     private BarangController controller;
@@ -21,7 +21,7 @@ public class BarangView extends JFrame {
         controller = new BarangController();
 
         setTitle("Edit Data Barang Toko");
-        setSize(650, 490); // Sedikit menambah tinggi frame untuk tombol baru
+        setSize(650, 490); 
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -60,27 +60,27 @@ public class BarangView extends JFrame {
         add(txtStok);
 
         btnTambah = new JButton("Tambah");
-        btnTambah.setBounds(370, 20, 130, 30); // Menyesuaikan lebar tombol
+        btnTambah.setBounds(370, 20, 130, 30); 
         add(btnTambah);
 
         btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(370, 60, 130, 30); // Menyesuaikan lebar tombol
+        btnUpdate.setBounds(370, 60, 130, 30); 
         add(btnUpdate);
 
         btnHapus = new JButton("Hapus");
-        btnHapus.setBounds(370, 100, 130, 30); // Menyesuaikan lebar tombol
+        btnHapus.setBounds(370, 100, 130, 30); 
         add(btnHapus);
         
         btnClear = new JButton("Clear Form");
-        btnClear.setBounds(370, 140, 130, 30); // Menyesuaikan lebar tombol
+        btnClear.setBounds(370, 140, 130, 30); 
         add(btnClear);
 
-        // Tombol Kembali ke Menu Transaksi
+        
         btnKembaliMenuTransaksi = new JButton("Menu Transaksi");
-        btnKembaliMenuTransaksi.setBounds(370, 180, 130, 30); // Posisi di bawah btnClear
+        btnKembaliMenuTransaksi.setBounds(370, 180, 130, 30); 
         add(btnKembaliMenuTransaksi);
 
-        // Tabel
+        
         tableModel = new DefaultTableModel(new String[]{"ID", "Nama", "Harga", "Stok"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -89,13 +89,12 @@ public class BarangView extends JFrame {
         };
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
-        // Menyesuaikan posisi Y dan tinggi JScrollPane
+        
         scrollPane.setBounds(30, 220, 580, 220); 
         add(scrollPane);
 
         loadTableData();
 
-        // Aksi Tombol Tambah
         btnTambah.addActionListener(e -> {
             try {
                 String nama = txtNama.getText().trim();
@@ -124,7 +123,6 @@ public class BarangView extends JFrame {
             }
         });
 
-        // Aksi Tombol Update
         btnUpdate.addActionListener(e -> {
             try {
                 if (txtId.getText().trim().isEmpty()) {
@@ -158,7 +156,6 @@ public class BarangView extends JFrame {
             }
         });
 
-        // Aksi Tombol Hapus
         btnHapus.addActionListener(e -> {
             try {
                 if (txtId.getText().trim().isEmpty()) {
@@ -179,20 +176,15 @@ public class BarangView extends JFrame {
             }
         });
         
-        // Aksi Tombol Clear Form
         btnClear.addActionListener(e -> {
             clearForm();
         });
 
-        // Aksi Tombol Kembali Menu Transaksi
         btnKembaliMenuTransaksi.addActionListener(e -> {
-            // Buka MenuTransaksiView (pastikan kelas ini ada di package yang benar)
             new TransaksiView().setVisible(true);
-            // Tutup jendela BarangView saat ini
             BarangView.this.dispose(); 
         });
 
-        // Aksi Klik Tabel
         table.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int row = table.getSelectedRow();
